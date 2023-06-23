@@ -48,4 +48,8 @@ export class CoursesComponent implements OnInit {
   selectCourse(course) {
     this.selectedCourse = course;
   }
+
+  deleteCourse(id: number) {
+    console.log(id);
+  }
 }

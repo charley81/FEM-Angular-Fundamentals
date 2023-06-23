@@ -1,0 +1,17 @@
+a {
+  display: flex;
+  color: #777;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+mat-sidenav {
+  padding: 2rem 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.active {
+  color: #333;
+}

@@ -8,11 +8,19 @@
         <!-- COURSES LIST -->
         <ul>
           <li *ngFor="let course of courses" (click)="selectCourse(course)">
-            <h3>{{ course.title | titlecase }}</h3>
-            <p>{{ course.description }}</p>
-            <!-- <button mat-icon-button color="warn" >
-
-            </button> -->
+            <div class="content">
+              <h3>{{ course.title | titlecase }}</h3>
+              <p>{{ course.description }}</p>
+            </div>
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="
+                deleteCourse(course.id); $event.stopImmediatePropagation()
+              "
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
           </li>
         </ul>
       </mat-card-content>
