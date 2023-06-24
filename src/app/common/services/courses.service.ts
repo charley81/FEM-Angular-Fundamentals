@@ -17,6 +17,26 @@ export class CoursesService {
     return this.http.get(this.getUrl());
   }
 
+  // get single course
+  find(id: string) {
+    return this.http.get(this.getUrlWithId(id));
+  }
+
+  // create course
+  create(course: Course) {
+    return this.http.post(this.getUrl(), course);
+  }
+
+  // update course
+  update(course: Course) {
+    return this.http.put(this.getUrlWithId(course.id), course);
+  }
+
+  // delete course
+  delete(course) {
+    return this.http.delete(this.getUrlWithId(course.id));
+  }
+
   getUrl() {
     return `${BASE_URL}/${this.model}`;
   }
