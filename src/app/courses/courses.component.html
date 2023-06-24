@@ -6,7 +6,7 @@
       </mat-card-header>
       <mat-card-content>
         <!-- COURSES LIST -->
-        <ul>
+        <ul class="list">
           <li *ngFor="let course of courses" (click)="selectCourse(course)">
             <div class="content">
               <h3>{{ course.title | titlecase }}</h3>
@@ -30,7 +30,12 @@
   <div class="course-details">
     <mat-card>
       <mat-card-header>
-        <mat-card-title> Select Course </mat-card-title>
+        <mat-card-title>
+          <span *ngIf="selectedCourse?.id; else elseBlock">{{
+            selectedCourse.title
+          }}</span>
+          <ng-template #elseBlock>Select a course</ng-template>
+        </mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <!-- COURSE FORM -->
@@ -38,6 +43,7 @@
       </mat-card-content>
       <mat-card-actions>
         <!-- COURSE ACTIONS -->
+        <button type="button" (click)="selectCourse(123)">Cancel</button>
       </mat-card-actions>
     </mat-card>
   </div>
