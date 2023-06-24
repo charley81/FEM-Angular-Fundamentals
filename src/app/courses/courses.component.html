@@ -32,19 +32,58 @@
       <mat-card-header>
         <mat-card-title>
           <span *ngIf="selectedCourse?.id; else elseBlock">{{
-            selectedCourse.title
+            originalTitle | titlecase
           }}</span>
           <ng-template #elseBlock>Select a course</ng-template>
         </mat-card-title>
       </mat-card-header>
-      <mat-card-content>
-        <!-- COURSE FORM -->
-        <pre>{{ selectedCourse | json }}</pre>
-      </mat-card-content>
-      <mat-card-actions>
-        <!-- COURSE ACTIONS -->
-        <button type="button" (click)="selectCourse(123)">Cancel</button>
-      </mat-card-actions>
+      <form #form="ngForm" (submit)="saveCourse(selectedCourse)">
+        <mat-card-content>
+          <!-- COURSE FORM -->
+          <input
+            type="text"
+            placeholder="Title"
+            [(ngModel)]="selectedCourse.title"
+            name="title"
+            required
+          />
+          <input
+            type="text"
+            placeholder="Description"
+            [(ngModel)]="selectedCourse.description"
+            name="description"
+          />
+          <section class="full-width">
+            <h4>{{ selectedCourse.percentComplete }}% Complete</h4>
+            <mat-slider
+              min="1"
+              max="100"
+              name="percentComplete"
+              [(ngModel)]="selectedCourse.percentComplete"
+            ></mat-slider>
+          </section>
+          <section>
+            <mat-checkbox [(ngModel)]="selectedCourse.favorite" name="favorite">
+              Favorite
+            </mat-checkbox>
+          </section>
+        </mat-card-content>
+        <mat-card-actions>
+          <!-- COURSE ACTIONS -->
+          <button
+            type="submit"
+            mat-button
+            color="primary"
+            [disabled]="form.invalid"
+          >
+            Save
+          </button>
+          <button type="button" mat-button (click)="reset()">Cancel</button>
+        </mat-card-actions>
+      </form>
+      <hr />
+      <pre>{{ form.value | json }}</pre>
+      <pre>{{ form.valid | json }}</pre>
     </mat-card>
   </div>
 </div>

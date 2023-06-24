@@ -5,7 +5,7 @@
   <mat-card-content>
     <!-- LESSON LIST -->
     <ul>
-      <li *ngFor="let lesson of courseLessons" (click)="selectLesson(lesson)">
+      <li *ngFor="let lesson of lessons" (click)="selectLesson(lesson)">
         {{ lesson.title }}
       </li>
     </ul>
