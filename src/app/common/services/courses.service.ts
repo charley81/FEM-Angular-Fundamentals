@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Course } from '../models/course';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 const BASE_URL = 'http://localhost:3000';
 
@@ -33,15 +34,15 @@ export class CoursesService {
   }
 
   // delete course
-  delete(course) {
-    return this.http.delete(this.getUrlWithId(course.id));
+  delete(id: string) {
+    return this.http.delete(this.getUrlWithId(id));
   }
 
-  getUrl() {
+  getUrl(): string {
     return `${BASE_URL}/${this.model}`;
   }
 
-  getUrlWithId(id: string) {
+  getUrlWithId(id: string): string {
     return `${this.getUrl()}/${id}`;
   }
 }

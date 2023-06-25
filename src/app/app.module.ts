@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { CoursesComponent } from './courses/courses.component';
 import { HomeComponent } from './home/home.component';
 import { MaterialModule } from './material.module';
+import { CourseListComponent } from './courses/course-list/course-list.component';
+import { CourseDetailsComponent } from './courses/course-details/course-details.component';
 
 @NgModule({
   imports: [
@@ -19,7 +21,7 @@ import { MaterialModule } from './material.module';
     HttpClientModule,
     FormsModule,
   ],
-  declarations: [AppComponent, HomeComponent, CoursesComponent],
+  declarations: [AppComponent, HomeComponent, CoursesComponent, CourseListComponent, CourseDetailsComponent],
   providers: [],
   bootstrap: [AppComponent],
 })

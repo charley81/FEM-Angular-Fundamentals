@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Lesson } from '../models/lesson';
 import { from } from 'rxjs';
 
+const BASE_URL = 'http://localhost:3000';
+
 @Injectable({
   providedIn: 'root',
 })

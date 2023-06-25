@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Course } from '../common/models/course';
 import { CoursesService } from '../common/services/courses.service';
+import { Observable } from 'rxjs';
 
 const emptyCourse: Course = {
   id: null,
@@ -17,31 +18,54 @@ const emptyCourse: Course = {
 })
 export class CoursesComponent implements OnInit {
   courses = [];
-  selectedCourse = emptyCourse;
+  courses$: any;
+  currentCourse = emptyCourse;
   originalTitle = '';
 
-  constructor(private coursesService: CoursesService) {}
+  constructor(private coursesService: CoursesService) {
+    this.fetchCourses();
+  }
 
-  ngOnInit(): void {
-    this.coursesService
-      .all()
-      .subscribe((result: any) => (this.courses = result));
+  ngOnInit(): void {}
+
+  fetchCourses() {
+    this.courses$ = this.coursesService.all();
+    // this.coursesService
+    //   .all()
+    //   .subscribe((result: any) => (this.courses = result));
   }
 
   selectCourse(course) {
-    this.selectedCourse = { ...course };
-    this.originalTitle = course.title;
+    this.currentCourse = course;
   }
 
-  deleteCourse(id: number) {
-    console.log(id);
+  deleteCourse(id: string) {
+    this.coursesService.delete(id).subscribe((result) => this.fetchCourses());
   }
 
   saveCourse(course: Course) {
-    console.log(course);
+    if (course.id) {
+      this.updateCourse(course);
+    } else {
+      this.createCourse(course);
+    }
+    this.reset();
+  }
+
+  createCourse(course: Course) {
+    this.coursesService
+      .create(course)
+      .subscribe((result) => this.fetchCourses());
+  }
+
+  updateCourse(course: Course) {
+    this.coursesService
+      .update(course)
+      .subscribe((result) => this.fetchCourses());
   }
 
   reset() {
-    this.selectedCourse = { ...emptyCourse };
+    console.log('reset');
+    this.currentCourse = { ...emptyCourse };
   }
 }
